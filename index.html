@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day 💕</title>
+    <title>For Linda 💕</title>
     <style>
         * {
             margin: 0;
@@ -17,30 +17,68 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
             overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating hearts background */
+        .bg-heart {
+            position: fixed;
+            font-size: 30px;
+            opacity: 0.3;
+            animation: float 10s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
         }
 
         .container {
             text-align: center;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 60px 40px;
             border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
-            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
+            max-width: 600px;
             width: 90%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .bear {
+            font-size: 5em;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
         h1 {
             color: #ff1493;
             font-size: 2.5em;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
         }
 
-        .hearts {
-            font-size: 3em;
-            margin-bottom: 20px;
+        .subtext {
+            color: #ff69b4;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .funny-message {
+            color: #ff1493;
+            font-size: 1.1em;
+            margin: 20px 0;
+            min-height: 30px;
+            font-weight: bold;
         }
 
         .buttons {
@@ -48,8 +86,10 @@
             display: flex;
             gap: 20px;
             justify-content: center;
+            align-items: center;
             position: relative;
-            min-height: 60px;
+            min-height: 80px;
+            flex-wrap: wrap;
         }
 
         button {
@@ -59,17 +99,19 @@
             border-radius: 15px;
             cursor: pointer;
             font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
         }
 
         #yesBtn {
-            background: #ff1493;
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
             color: white;
             box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+            z-index: 100;
         }
 
         #yesBtn:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(-5deg);
             box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6);
         }
 
@@ -81,46 +123,129 @@
             transition: all 0.3s ease;
         }
 
+        #noBtn:hover {
+            background: #ffe0f0;
+        }
+
         .celebration {
             display: none;
-            margin-top: 30px;
         }
 
         .celebration.show {
             display: block;
-            animation: fadeIn 0.5s;
+            animation: zoomIn 0.5s;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.8); }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0); }
             to { opacity: 1; transform: scale(1); }
         }
 
         .celebration h2 {
             color: #ff1493;
-            font-size: 2em;
-            margin-bottom: 15px;
+            font-size: 2.5em;
+            margin-bottom: 20px;
         }
 
         .celebration p {
             color: #ff69b4;
-            font-size: 1.2em;
+            font-size: 1.3em;
+            line-height: 1.6;
+        }
+
+        .gif-container {
+            margin: 20px 0;
+            font-size: 4em;
+        }
+
+        .counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 20, 147, 0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #ff1493;
+            font-weight: bold;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px) rotate(-5deg); }
+            75% { transform: translateX(10px) rotate(5deg); }
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        .puppy-eyes {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #ffe0f0;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff1493, #ff69b4);
+            transition: width 0.5s;
+            border-radius: 10px;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            z-index: 1000;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
+    <!-- Background floating hearts -->
+    <div class="bg-heart" style="left: 10%; top: 20%;">💕</div>
+    <div class="bg-heart" style="left: 80%; top: 30%; animation-delay: 2s;">❤️</div>
+    <div class="bg-heart" style="left: 15%; top: 70%; animation-delay: 4s;">💖</div>
+    <div class="bg-heart" style="left: 85%; top: 60%; animation-delay: 6s;">💗</div>
+    <div class="bg-heart" style="left: 50%; top: 80%; animation-delay: 3s;">💝</div>
+
     <div class="container">
-        <div class="hearts">💕</div>
-        <h1>Will you be my Valentine, Linda?</h1>
+        <div class="counter">
+            No attempts: <span id="noCount">0</span>
+        </div>
+
+        <div class="bear" id="bear">🐻</div>
+        <h1 id="question">Will you be my Valentine, Linda?</h1>
+        <p class="subtext" id="subtext">Please say yes... 🥺</p>
+
+        <div class="puppy-eyes" id="puppyEyes">👉👈</div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+        </div>
+
+        <p class="funny-message" id="funnyMessage"></p>
         
-        <div class="buttons">
+        <div class="buttons" id="buttonContainer">
             <button id="yesBtn">Yes! 💖</button>
             <button id="noBtn">No</button>
         </div>
 
         <div class="celebration" id="celebration">
-            <h2>Yay! 🎉💕</h2>
-            <p>I'm so happy! Happy Valentine's Day, Linda! ❤️</p>
+            <div class="gif-container">🎉💕🎊</div>
+            <h2>YAAAAY! 🥳</h2>
+            <p>I knew you couldn't resist! 😄</p>
+            <p style="margin-top: 20px;">Happy Valentine's Day, Linda! ❤️</p>
+            <p style="margin-top: 10px; font-size: 1em;">You just made me the happiest! 🌟</p>
+            <div style="margin-top: 30px; font-size: 3em;">😍💑💕</div>
         </div>
     </div>
 
@@ -129,74 +254,217 @@
         const yesBtn = document.getElementById('yesBtn');
         const celebration = document.getElementById('celebration');
         const container = document.querySelector('.container');
+        const funnyMessage = document.getElementById('funnyMessage');
+        const noCount = document.getElementById('noCount');
+        const bear = document.getElementById('bear');
+        const question = document.getElementById('question');
+        const subtext = document.getElementById('subtext');
+        const puppyEyes = document.getElementById('puppyEyes');
+        const progressFill = document.getElementById('progressFill');
+        const buttonContainer = document.getElementById('buttonContainer');
 
-        // Make the No button run away on hover
-        noBtn.addEventListener('mouseenter', () => {
-            const containerRect = container.getBoundingClientRect();
+        let noClickCount = 0;
+        let yesBtnScale = 1;
+        let noBtnScale = 1;
+
+        const funnyMessages = [
+            "Are you sure? 🥺",
+            "Really? Please reconsider! 😢",
+            "The bear is crying now... 😭",
+            "What if I told you I have chocolate? 🍫",
+            "I'll do the dishes for a week! 🍽️",
+            "I'll watch whatever movie you want! 🎬",
+            "Come on, the button is getting smaller for a reason! 😅",
+            "Even the No button wants to run away from that answer! 🏃",
+            "I'm running out of funny messages here... 😬",
+            "The universe wants you to say yes! ✨",
+            "Okay, this is just getting silly now 😂",
+            "Fun fact: 100% of people who clicked Yes were happy! 📊",
+            "The Yes button is looking very clickable right now... 👀",
+            "I promise I'm not this desperate in real life... okay maybe a little 😅",
+            "FINE! But I'm taking the bear with me! 🐻💔"
+        ];
+
+        const bearEmojis = ['🐻', '😢', '😭', '🥺', '😿', '💔'];
+        const puppyEyesEmojis = ['👉👈', '🥺', '😢', '😿', '🙏', '💔'];
+
+        function updateProgress() {
+            const progress = Math.min((noClickCount / 10) * 100, 100);
+            progressFill.style.width = progress + '%';
+        }
+
+        // Make the No button run away and shrink
+        function handleNoHover() {
+            noClickCount++;
+            noCount.textContent = noClickCount;
+            updateProgress();
+
+            // Show funny message
+            const messageIndex = Math.min(noClickCount - 1, funnyMessages.length - 1);
+            funnyMessage.textContent = funnyMessages[messageIndex];
+
+            // Change bear emoji
+            const bearIndex = Math.min(Math.floor(noClickCount / 2), bearEmojis.length - 1);
+            bear.textContent = bearEmojis[bearIndex];
+
+            // Change puppy eyes
+            const eyesIndex = Math.min(Math.floor(noClickCount / 2), puppyEyesEmojis.length - 1);
+            puppyEyes.textContent = puppyEyesEmojis[eyesIndex];
+
+            // Shake container
+            container.classList.add('shake');
+            setTimeout(() => container.classList.remove('shake'), 500);
+
+            // Make Yes button bigger
+            yesBtnScale += 0.15;
+            yesBtn.style.transform = `scale(${yesBtnScale})`;
+            yesBtn.style.padding = `${15 * yesBtnScale}px ${40 * yesBtnScale}px`;
+
+            // Make No button smaller
+            noBtnScale = Math.max(noBtnScale - 0.1, 0.3);
+            noBtn.style.transform = `scale(${noBtnScale})`;
+
+            // Move No button to random position
+            const containerRect = buttonContainer.getBoundingClientRect();
             const btnRect = noBtn.getBoundingClientRect();
             
-            // Calculate available space
-            const maxX = containerRect.width - btnRect.width - 80;
-            const maxY = containerRect.height - btnRect.height - 120;
+            const maxX = 200;
+            const maxY = 100;
             
-            // Generate random position
-            const randomX = Math.random() * maxX - maxX / 2;
-            const randomY = Math.random() * maxY - maxY / 2;
+            const randomX = (Math.random() - 0.5) * maxX;
+            const randomY = (Math.random() - 0.5) * maxY;
             
-            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-        });
+            noBtn.style.left = `calc(50% + ${randomX}px)`;
+            noBtn.style.top = `${randomY}px`;
 
-        // Also run away on touch devices
+            // Update messages based on clicks
+            if (noClickCount === 5) {
+                question.textContent = "Pretty please? 🥺";
+            }
+            if (noClickCount === 10) {
+                question.textContent = "I'm begging you, Linda! 😭";
+                subtext.textContent = "Look how big the Yes button is now!";
+            }
+            if (noClickCount === 15) {
+                question.textContent = "LINDA PLEASE! 💔";
+                subtext.textContent = "The No button can barely be seen anymore!";
+                noBtn.textContent = "n";
+            }
+            if (noClickCount >= 20) {
+                // Make No button super tiny and hide it
+                noBtn.style.opacity = '0.3';
+                noBtn.style.fontSize = '0.5em';
+                funnyMessage.textContent = "You know what? Just click Yes. The No button has given up. 😂";
+            }
+        }
+
+        // No button events
+        noBtn.addEventListener('mouseenter', handleNoHover);
         noBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
-            const containerRect = container.getBoundingClientRect();
-            const btnRect = noBtn.getBoundingClientRect();
-            
-            const maxX = containerRect.width - btnRect.width - 80;
-            const maxY = containerRect.height - btnRect.height - 120;
-            
-            const randomX = Math.random() * maxX - maxX / 2;
-            const randomY = Math.random() * maxY - maxY / 2;
-            
-            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            handleNoHover();
+        });
+
+        // Prevent clicking No button
+        noBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            handleNoHover();
         });
 
         // Yes button action
         yesBtn.addEventListener('click', () => {
-            noBtn.style.display = 'none';
-            yesBtn.style.display = 'none';
+            // Hide everything
+            document.getElementById('buttonContainer').style.display = 'none';
+            document.getElementById('funnyMessage').style.display = 'none';
+            document.getElementById('question').style.display = 'none';
+            document.getElementById('subtext').style.display = 'none';
+            document.getElementById('bear').style.display = 'none';
+            document.getElementById('puppyEyes').style.display = 'none';
+            document.querySelector('.progress-bar').style.display = 'none';
+            document.querySelector('.counter').style.display = 'none';
+            
+            // Show celebration
             celebration.classList.add('show');
             
-            // Add floating hearts animation
+            // Create confetti
+            createConfetti();
+            
+            // Create floating hearts
             createFloatingHearts();
+
+            // Change background
+            document.body.style.background = 'linear-gradient(135deg, #ff69b4, #ff1493, #ff69b4)';
         });
 
+        function createConfetti() {
+            const colors = ['#ff1493', '#ff69b4', '#ffc0cb', '#ff91c1', '#ffd700'];
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    
+                    document.body.appendChild(confetti);
+                    
+                    const duration = Math.random() * 3 + 2;
+                    const xMovement = (Math.random() - 0.5) * 200;
+                    
+                    confetti.animate([
+                        { transform: `translateY(0) translateX(0) rotate(0deg)`, opacity: 1 },
+                        { transform: `translateY(${window.innerHeight}px) translateX(${xMovement}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                    ], {
+                        duration: duration * 1000,
+                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    });
+                    
+                    setTimeout(() => confetti.remove(), duration * 1000);
+                }, i * 30);
+            }
+        }
+
         function createFloatingHearts() {
-            for (let i = 0; i < 20; i++) {
+            const hearts = ['❤️', '💕', '💖', '💗', '💝', '💘'];
+            for (let i = 0; i < 30; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
-                    heart.textContent = '❤️';
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
                     heart.style.position = 'fixed';
                     heart.style.left = Math.random() * 100 + '%';
                     heart.style.top = '100%';
-                    heart.style.fontSize = Math.random() * 30 + 20 + 'px';
-                    heart.style.transition = 'all 3s ease-out';
+                    heart.style.fontSize = Math.random() * 40 + 30 + 'px';
                     heart.style.pointerEvents = 'none';
                     heart.style.zIndex = '1000';
                     
                     document.body.appendChild(heart);
                     
-                    setTimeout(() => {
-                        heart.style.top = '-10%';
-                        heart.style.opacity = '0';
-                    }, 100);
+                    const duration = Math.random() * 3 + 3;
+                    const xMovement = (Math.random() - 0.5) * 100;
                     
-                    setTimeout(() => {
-                        heart.remove();
-                    }, 3100);
+                    heart.animate([
+                        { transform: `translateY(0) translateX(0) rotate(0deg)`, opacity: 1 },
+                        { transform: `translateY(-${window.innerHeight + 100}px) translateX(${xMovement}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                    ], {
+                        duration: duration * 1000,
+                        easing: 'linear'
+                    });
+                    
+                    setTimeout(() => heart.remove(), duration * 1000);
                 }, i * 200);
             }
         }
+
+        // Easter egg: Triple click on bear
+        let bearClickCount = 0;
+        bear.addEventListener('click', () => {
+            bearClickCount++;
+            if (bearClickCount === 3) {
+                alert("The bear says: 'Please click Yes! I can't take this anymore!' 🐻💔");
+                bearClickCount = 0;
+            }
+        });
     </script>
 </body>
 </html>
