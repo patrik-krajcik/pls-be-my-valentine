@@ -1,169 +1,470 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Important Question</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Linda 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #111;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
+        body {
+            background: linear-gradient(135deg, #ffc3e1 0%, #ff9ec9 50%, #ffb3d9 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-    .card {
-        background: #1e1e1e;
-        padding: 30px;
-        border-radius: 20px;
-        max-width: 420px;
-        width: 90%;
-        text-align: center;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-    }
+        /* Floating hearts background */
+        .bg-heart {
+            position: fixed;
+            font-size: 30px;
+            opacity: 0.3;
+            animation: float 10s infinite;
+            pointer-events: none;
+        }
 
-    h1 {
-        font-size: 1.6em;
-        margin-bottom: 15px;
-    }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
 
-    .crossed {
-        text-decoration: line-through;
-        opacity: 0.6;
-    }
+        .page {
+            display: none;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
+            max-width: 600px;
+            width: 90%;
+            animation: fadeIn 0.5s;
+        }
 
-    img {
-        width: 100%;
-        border-radius: 15px;
-        margin: 15px 0;
-    }
+        .page.active {
+            display: block;
+        }
 
-    .buttons {
-        display: flex;
-        gap: 15px;
-        justify-content: center;
-        margin-top: 20px;
-        position: relative;
-    }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
 
-    button {
-        padding: 12px 25px;
-        font-size: 1em;
-        border: none;
-        border-radius: 12px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: transform 0.15s;
-    }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px) rotate(-2deg); }
+            75% { transform: translateX(10px) rotate(2deg); }
+        }
 
-    button:hover {
-        transform: scale(1.1);
-    }
+        .shake {
+            animation: shake 0.5s;
+        }
 
-    .yes {
-        background: hotpink;
-        color: black;
-    }
+        h1 {
+            color: #ff1493;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+            line-height: 1.3;
+        }
 
-    .no {
-        background: #333;
-        color: white;
-        border: 1px solid #555;
-    }
-</style>
+        .strikethrough {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .gif-container {
+            margin: 30px 0;
+            font-size: 6em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .subtext {
+            color: #ff69b4;
+            font-size: 1.3em;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        .buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 20px 50px;
+            font-size: 1.4em;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            position: relative;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6);
+        }
+
+        .no-btn {
+            background: #ffffff;
+            color: #ff1493;
+            border: 3px solid #ff1493;
+        }
+
+        .no-btn:hover {
+            background: #ffe0f0;
+            transform: scale(1.05);
+        }
+
+        .page-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 20, 147, 0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #ff1493;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        /* Celebration styles */
+        .celebration-gif {
+            font-size: 8em;
+            animation: spin 1s ease-in-out;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg) scale(0); }
+            to { transform: rotate(360deg) scale(1); }
+        }
+
+        .final-message {
+            color: #ff1493;
+            font-size: 1.4em;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        /* Button switch animation */
+        @keyframes buttonSwitch {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.8) rotate(5deg); }
+            100% { transform: scale(1); }
+        }
+
+        .switching {
+            animation: buttonSwitch 0.3s;
+        }
+
+        .both-yes {
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+        }
+
+        .both-yes:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6);
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Background floating hearts -->
+    <div class="bg-heart" style="left: 10%; top: 20%;">💕</div>
+    <div class="bg-heart" style="left: 80%; top: 30%; animation-delay: 2s;">❤️</div>
+    <div class="bg-heart" style="left: 15%; top: 70%; animation-delay: 4s;">💖</div>
+    <div class="bg-heart" style="left: 85%; top: 60%; animation-delay: 6s;">💗</div>
+    <div class="bg-heart" style="left: 50%; top: 80%; animation-delay: 3s;">💝</div>
 
-<div class="card">
-    <h1 id="question"></h1>
-    <img id="gif" src="" alt="reaction gif">
-    <div class="buttons" id="buttons"></div>
-</div>
+    <!-- Page 1 -->
+    <div class="page active" id="page1">
+        <div class="page-counter">Attempt 1/6</div>
+        <h1>Will you be my <span class="strikethrough">mommy</span> Valentine, Linda pls?</h1>
+        <div class="gif-container">😏</div>
+        <p class="subtext">I promise this is a totally normal question...</p>
+        <div class="buttons">
+            <button class="yes-btn" id="yes1">Yes 💖</button>
+            <button class="no-btn" id="no1">No</button>
+        </div>
+    </div>
 
-<script>
-const stages = [
-    {
-        text: 'Will you be my <span class="crossed">mommy</span> Valentine, Linda pls?',
-        gif: 'https://media.tenor.com/6ZkJEn80W7kAAAAC/side-eye.gif',
-        trickYes: true
-    },
-    {
-        text: 'Really? No? I’m giving you ONE more chance.',
-        gif: 'https://media.tenor.com/fdYlKz9n4dAAAAAC/disappointed.gif',
-        trickYes: true
-    },
-    {
-        text: 'Are you REALLY really sure??',
-        gif: 'https://media.tenor.com/9kJ9xK4zEJYAAAAC/crying.gif',
-        trickYes: false
-    },
-    {
-        text: 'Okay. You know what? You have no choice.',
-        gif: 'https://media.tenor.com/Ws6Dm1ZW_vMAAAAC/victory.gif',
-        final: true
-    }
-];
+    <!-- Page 2 -->
+    <div class="page" id="page2">
+        <div class="page-counter">Attempt 2/6</div>
+        <h1>Really? No?</h1>
+        <div class="gif-container">😾</div>
+        <p class="subtext">I'll give you ONE more chance...</p>
+        <p class="subtext" style="font-size: 0.9em; margin-top: -10px;">(I'm a very forgiving person)</p>
+        <div class="buttons">
+            <button class="yes-btn" id="yes2">Yes 💖</button>
+            <button class="no-btn" id="no2">No</button>
+        </div>
+    </div>
 
-let stage = 0;
+    <!-- Page 3 -->
+    <div class="page" id="page3">
+        <div class="page-counter">Attempt 3/6</div>
+        <h1>Are you REALLY really sure??</h1>
+        <div class="gif-container">😭</div>
+        <p class="subtext">My heart is literally breaking right now...</p>
+        <p class="subtext" style="font-size: 0.9em;">*dramatic violin music playing*</p>
+        <div class="buttons">
+            <button class="yes-btn" id="yes3">Yes 💖</button>
+            <button class="no-btn" id="no3">No</button>
+        </div>
+    </div>
 
-const questionEl = document.getElementById('question');
-const gifEl = document.getElementById('gif');
-const buttonsEl = document.getElementById('buttons');
+    <!-- Page 4 -->
+    <div class="page" id="page4">
+        <div class="page-counter">Attempt 4/6</div>
+        <h1>Okay but like... SERIOUSLY?!</h1>
+        <div class="gif-container">🙃</div>
+        <p class="subtext">I'm starting to think you enjoy watching me suffer</p>
+        <p class="subtext" style="font-size: 0.9em;">This is borderline cruel, Linda</p>
+        <div class="buttons">
+            <button class="yes-btn" id="yes4">Yes 💖</button>
+            <button class="no-btn" id="no4">No</button>
+        </div>
+    </div>
 
-function render() {
-    const current = stages[stage];
-    questionEl.innerHTML = current.text;
-    gifEl.src = current.gif;
-    buttonsEl.innerHTML = '';
+    <!-- Page 5 -->
+    <div class="page" id="page5">
+        <div class="page-counter">Attempt 5/6</div>
+        <h1>LINDA. PLEASE.</h1>
+        <div class="gif-container">😤</div>
+        <p class="subtext">I've spent HOURS on this website!</p>
+        <p class="subtext" style="font-size: 0.9em;">Okay fine, like 20 minutes, but STILL!</p>
+        <div class="buttons">
+            <button class="yes-btn" id="yes5">Yes 💖</button>
+            <button class="no-btn" id="no5">No</button>
+        </div>
+    </div>
 
-    if (current.final) {
-        addButton('YES', 'yes');
-        addButton('YES', 'yes');
-        return;
-    }
+    <!-- Final Page -->
+    <div class="page" id="page6">
+        <div class="page-counter">FINAL DECISION</div>
+        <h1>You know what?</h1>
+        <div class="celebration-gif">😈</div>
+        <p class="subtext" style="font-size: 1.5em; font-weight: bold;">You have NO CHOICE!</p>
+        <p class="subtext">Both buttons say YES now. I've had enough! 🎉</p>
+        <div class="buttons">
+            <button class="both-yes" id="finalYes1">YES! 💖</button>
+            <button class="both-yes" id="finalYes2">ALSO YES! 💕</button>
+        </div>
+    </div>
 
-    const yes = addButton('Yes', 'yes');
-    const no = addButton('No', 'no');
+    <!-- Victory Page -->
+    <div class="page" id="victory">
+        <h1>FINALLY!! 🎊</h1>
+        <div class="celebration-gif">🎉</div>
+        <p class="final-message">I KNEW you'd come around eventually! 😄</p>
+        <p class="final-message">Happy Valentine's Day, Linda! ❤️</p>
+        <p class="subtext">That was quite the journey, huh? 😅</p>
+        <div style="margin-top: 30px; font-size: 4em;">💑💕✨</div>
+        <p class="subtext" style="margin-top: 30px; font-size: 0.9em;">
+            (Thanks for playing along with my silly shenanigans)
+        </p>
+    </div>
 
-    if (current.trickYes) {
-        yes.addEventListener('mouseenter', () => swapButtons(yes, no));
-    }
+    <script>
+        let currentPage = 1;
 
-    yes.addEventListener('click', () => {
-        if (!current.trickYes) nextStage();
-    });
+        // Page 1 buttons
+        document.getElementById('yes1').addEventListener('click', function(e) {
+            switchButton(this, 'No', 'no-btn', () => goToPage(2));
+        });
+        document.getElementById('no1').addEventListener('click', () => goToPage(2));
 
-    no.addEventListener('click', nextStage);
-}
+        // Page 2 buttons
+        document.getElementById('yes2').addEventListener('click', function(e) {
+            switchButton(this, 'No', 'no-btn', () => goToPage(3));
+        });
+        document.getElementById('no2').addEventListener('click', () => goToPage(3));
 
-function addButton(text, cls) {
-    const btn = document.createElement('button');
-    btn.textContent = text;
-    btn.className = cls;
-    buttonsEl.appendChild(btn);
-    return btn;
-}
+        // Page 3 buttons
+        document.getElementById('yes3').addEventListener('click', function(e) {
+            switchButton(this, 'No', 'no-btn', () => goToPage(4));
+        });
+        document.getElementById('no3').addEventListener('click', () => goToPage(4));
 
-function swapButtons(yes, no) {
-    yes.textContent = 'No';
-    yes.className = 'no';
-    no.textContent = 'Yes';
-    no.className = 'yes';
-}
+        // Page 4 buttons
+        document.getElementById('yes4').addEventListener('click', function(e) {
+            switchButton(this, 'No', 'no-btn', () => goToPage(5));
+        });
+        document.getElementById('no4').addEventListener('click', () => goToPage(5));
 
-function nextStage() {
-    stage++;
-    render();
-}
+        // Page 5 buttons
+        document.getElementById('yes5').addEventListener('click', function(e) {
+            switchButton(this, 'No', 'no-btn', () => goToPage(6));
+        });
+        document.getElementById('no5').addEventListener('click', () => goToPage(6));
 
-render();
-</script>
+        // Final page - both buttons work!
+        document.getElementById('finalYes1').addEventListener('click', () => showVictory());
+        document.getElementById('finalYes2').addEventListener('click', () => showVictory());
 
+        function switchButton(button, newText, newClass, callback) {
+            // Remove yes button classes
+            button.classList.remove('yes-btn');
+            button.classList.add('switching');
+            
+            setTimeout(() => {
+                button.textContent = newText;
+                button.classList.add(newClass);
+                button.classList.remove('switching');
+                
+                // Shake the page
+                document.getElementById(`page${currentPage}`).classList.add('shake');
+                
+                setTimeout(() => {
+                    document.getElementById(`page${currentPage}`).classList.remove('shake');
+                    setTimeout(callback, 300);
+                }, 500);
+            }, 150);
+        }
+
+        function goToPage(pageNum) {
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+            currentPage = pageNum;
+            document.getElementById(`page${pageNum}`).classList.add('active');
+        }
+
+        function showVictory() {
+            document.getElementById('page6').classList.remove('active');
+            document.getElementById('victory').classList.add('active');
+            
+            // Create confetti
+            createConfetti();
+            
+            // Create floating hearts
+            createFloatingHearts();
+            
+            // Change background
+            document.body.style.background = 'linear-gradient(135deg, #ff69b4, #ff1493, #ff69b4)';
+        }
+
+        function createConfetti() {
+            const colors = ['#ff1493', '#ff69b4', '#ffc0cb', '#ff91c1', '#ffd700', '#fff'];
+            for (let i = 0; i < 150; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    const duration = Math.random() * 3 + 2;
+                    const xMovement = (Math.random() - 0.5) * 300;
+                    
+                    confetti.animate([
+                        { 
+                            transform: `translateY(0) translateX(0) rotate(0deg)`, 
+                            opacity: 1 
+                        },
+                        { 
+                            transform: `translateY(${window.innerHeight + 100}px) translateX(${xMovement}px) rotate(${Math.random() * 720}deg)`, 
+                            opacity: 0 
+                        }
+                    ], {
+                        duration: duration * 1000,
+                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    });
+                    
+                    setTimeout(() => confetti.remove(), duration * 1000);
+                }, i * 20);
+            }
+        }
+
+        function createFloatingHearts() {
+            const hearts = ['❤️', '💕', '💖', '💗', '💝', '💘', '💞'];
+            for (let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.position = 'fixed';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.top = '100%';
+                    heart.style.fontSize = Math.random() * 50 + 30 + 'px';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.zIndex = '1000';
+                    
+                    document.body.appendChild(heart);
+                    
+                    const duration = Math.random() * 4 + 3;
+                    const xMovement = (Math.random() - 0.5) * 150;
+                    
+                    heart.animate([
+                        { 
+                            transform: `translateY(0) translateX(0) rotate(0deg)`, 
+                            opacity: 1 
+                        },
+                        { 
+                            transform: `translateY(-${window.innerHeight + 200}px) translateX(${xMovement}px) rotate(${Math.random() * 360}deg)`, 
+                            opacity: 0 
+                        }
+                    ], {
+                        duration: duration * 1000,
+                        easing: 'linear'
+                    });
+                    
+                    setTimeout(() => heart.remove(), duration * 1000);
+                }, i * 150);
+            }
+        }
+
+        // Easter egg: Konami code
+        let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    alert("🎮 Cheat code activated! But you still have to click Yes eventually... 😏");
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+    </script>
 </body>
 </html>
