@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffc3e1 0%, #ff9ec9 50%, #ffb3d9 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #ff1493;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+        }
+
+        .hearts {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            position: relative;
+            min-height: 60px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        #yesBtn {
+            background: #ff1493;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6);
+        }
+
+        #noBtn {
+            background: #ffffff;
+            color: #ff1493;
+            border: 2px solid #ff1493;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        .celebration {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .celebration.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .celebration h2 {
+            color: #ff1493;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .celebration p {
+            color: #ff69b4;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hearts">💕</div>
+        <h1>Will you be my Valentine, Linda?</h1>
+        
+        <div class="buttons">
+            <button id="yesBtn">Yes! 💖</button>
+            <button id="noBtn">No</button>
+        </div>
+
+        <div class="celebration" id="celebration">
+            <h2>Yay! 🎉💕</h2>
+            <p>I'm so happy! Happy Valentine's Day, Linda! ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const celebration = document.getElementById('celebration');
+        const container = document.querySelector('.container');
+
+        // Make the No button run away on hover
+        noBtn.addEventListener('mouseenter', () => {
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            // Calculate available space
+            const maxX = containerRect.width - btnRect.width - 80;
+            const maxY = containerRect.height - btnRect.height - 120;
+            
+            // Generate random position
+            const randomX = Math.random() * maxX - maxX / 2;
+            const randomY = Math.random() * maxY - maxY / 2;
+            
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        });
+
+        // Also run away on touch devices
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            const maxX = containerRect.width - btnRect.width - 80;
+            const maxY = containerRect.height - btnRect.height - 120;
+            
+            const randomX = Math.random() * maxX - maxX / 2;
+            const randomY = Math.random() * maxY - maxY / 2;
+            
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        });
+
+        // Yes button action
+        yesBtn.addEventListener('click', () => {
+            noBtn.style.display = 'none';
+            yesBtn.style.display = 'none';
+            celebration.classList.add('show');
+            
+            // Add floating hearts animation
+            createFloatingHearts();
+        });
+
+        function createFloatingHearts() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.textContent = '❤️';
+                    heart.style.position = 'fixed';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.top = '100%';
+                    heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+                    heart.style.transition = 'all 3s ease-out';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.zIndex = '1000';
+                    
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.style.top = '-10%';
+                        heart.style.opacity = '0';
+                    }, 100);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 3100);
+                }, i * 200);
+            }
+        }
+    </script>
+</body>
+</html>
