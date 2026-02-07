@@ -309,35 +309,26 @@
     <script>
         let currentPage = 1;
 
-        // Page 1 buttons
-        document.getElementById('yes1').addEventListener('click', function(e) {
-            switchButton(this, 'Nie', 'no-btn', () => goToPage(2));
-        });
+                // Page 1
+        document.getElementById('yes1').addEventListener('click', () => showVictory());
         document.getElementById('no1').addEventListener('click', () => goToPage(2));
-
-        // Page 2 buttons
-        document.getElementById('yes2').addEventListener('click', function(e) {
-            switchButton(this, 'Nie', 'no-btn', () => goToPage(3));
-        });
+        
+        // Page 2
+        document.getElementById('yes2').addEventListener('click', () => showVictory());
         document.getElementById('no2').addEventListener('click', () => goToPage(3));
-
-        // Page 3 buttons
-        document.getElementById('yes3').addEventListener('click', function(e) {
-            switchButton(this, 'Nie', 'no-btn', () => goToPage(4));
-        });
+        
+        // Page 3
+        document.getElementById('yes3').addEventListener('click', () => showVictory());
         document.getElementById('no3').addEventListener('click', () => goToPage(4));
-
-        // Page 4 buttons
-        document.getElementById('yes4').addEventListener('click', function(e) {
-            switchButton(this, 'Nie', 'no-btn', () => goToPage(5));
-        });
+        
+        // Page 4
+        document.getElementById('yes4').addEventListener('click', () => showVictory());
         document.getElementById('no4').addEventListener('click', () => goToPage(5));
-
-        // Page 5 buttons
-        document.getElementById('yes5').addEventListener('click', function(e) {
-            switchButton(this, 'Nie', 'no-btn', () => goToPage(6));
-        });
+        
+        // Page 5
+        document.getElementById('yes5').addEventListener('click', () => showVictory());
         document.getElementById('no5').addEventListener('click', () => goToPage(6));
+
 
         // Final page - both buttons work!
         document.getElementById('finalYes1').addEventListener('click', () => showVictory());
