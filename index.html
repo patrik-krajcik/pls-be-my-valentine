@@ -361,7 +361,13 @@
         }
 
         function showVictory() {
+            document.getElementById('page1').classList.remove('active');
+            document.getElementById('page2').classList.remove('active');
+            document.getElementById('page3').classList.remove('active');
+            document.getElementById('page4').classList.remove('active');
+            document.getElementById('page5').classList.remove('active');
             document.getElementById('page6').classList.remove('active');
+
             document.getElementById('victory').classList.add('active');
             
             // Create confetti
